@@ -210,16 +210,13 @@ class Connection(NetworkConnectionBase):
             password = self.get_option("password")
             self.use_proxy = self.get_option("use_proxy")
             rest_version = self.get_option("rest_version")
-            if rest_version not in [
-                "10.04",
-                "10.08",
-                "10.09",
-                "10.13",
-                "10.16",
-            , "10.16"]:
-                raise AnsibleConnectionFailure("Invalid REST version: %s"
-                                               % rest_version)
-            self.base_url = "https://{0}/rest/v{1}/".format(switchip, rest_version)
+            if rest_version not in ["10.04", "10.08", "10.09"]:
+                raise AnsibleConnectionFailure(
+                    "Invalid REST version: %s" % rest_version
+                )
+            self.base_url = "https://{0}/rest/v{1}/".format(
+                switchip, rest_version
+            )
             # Set Credentials
             self.__username = username
             self.__password = password
